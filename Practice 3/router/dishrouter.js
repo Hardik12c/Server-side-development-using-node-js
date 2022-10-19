@@ -23,6 +23,23 @@ dishrouter.route('/')
 })
 .delete((req,res)=>{
     res.end("deleting all the dishes");
+})
+
+// making all thie dishes with dishes id request
+dishrouter.route('/:dishid')
+.get((req,res)=>{
+    res.end(`Will send the info of the ${req.params.dishid} to you`);
+})
+.post((req,res)=>{
+    res.statusCode=403;
+    res.end(`POST request not supported`);
+})
+.put((req,res)=>{
+    res.write(`Updating the dish: ${req.params.dishid} \n`)
+    res.end(`Will update the dish: ${req.body.name} with details: ${req.body.description}`);
+})
+.delete((req,res)=>{
+    res.end(`deleting the dish: ${req.params.dishid}`);
 });
 
 module.exports=dishrouter;

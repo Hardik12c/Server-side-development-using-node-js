@@ -5,20 +5,24 @@ const bodyparser=require('body-parser');
 const hostname='localhost';
 const port=3000;
 
+
+// adding routers
 const dishrouter=require('./router/dishrouter')
+const promorouter=require('./router/promorouter');
+const leaderrouter=require('./router/leaderrouter');
+
 
 const app=express();
-app.use(bodyparser.json());
+// app.use(bodyparser.json());
 
+// dish router mounted
 app.use('/dishes',dishrouter);
 
+// promorouter mounted
+app.use('/promotions',promorouter);
 
-app.use(express.static(__dirname+'/public'));
-app.use((req,res,next)=>{
-    res.statusCode=200;
-    res.setHeader('Content-Type','text/html');
-    res.end('<html><body><h1>This is an Express server</h1></body></html>');
-});
+// leaderrouter mounted
+app.use('/leader',leaderrouter);
 
 const server=http.createServer(app);
 
